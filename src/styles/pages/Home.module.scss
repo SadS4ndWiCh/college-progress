@@ -6,7 +6,7 @@
 
   max-width: 84em;
   margin: 0 auto;
-  padding: 2em 0;
+  padding: 2em;
 
   height: 100vh;
 
@@ -42,6 +42,10 @@
       font-size: 3em;
 
       color: $primary-text;
+    }
+
+    > div {
+      margin: 1em 0;
     }
 
     small {
