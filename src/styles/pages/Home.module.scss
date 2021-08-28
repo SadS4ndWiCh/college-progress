@@ -1,0 +1,53 @@
+@import '../variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 84em;
+  margin: 0 auto;
+  padding: 2em 0;
+
+  height: 100vh;
+
+  header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      font-size: 2.5em;
+
+      color: $primary-text;
+
+      span {
+        color: $pink;
+      }
+    }
+    p {
+      font-size: 1.2em;
+
+      color: $secundary-text;
+    }
+  }
+
+  main {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: 3em;
+
+      color: $primary-text;
+    }
+
+    small {
+      font-size: .9em;
+      
+      color: $discrete-text;
+    }
+  }
+}
