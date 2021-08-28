@@ -1,5 +1,7 @@
 import type { NextPage } from 'next'
 
+import { Countdown } from '@components/Countdown';
+
 import styles from '@styles/pages/Home.module.scss';
 
 const Home: NextPage = () => {
@@ -14,7 +16,7 @@ const Home: NextPage = () => {
 
       <main>
         <h2>Restam de aula:</h2>
-        {/* <Countdown /> */}
+        <Countdown />
         <small>É considerado o tempo completo, levando em conta mesmo dias sem aula</small>
       </main>
     </div>
