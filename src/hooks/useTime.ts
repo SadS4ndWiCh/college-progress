@@ -8,10 +8,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
-const START = dayjs.tz('2020-8-28 7:30');
 const END = dayjs.tz('2023-1-28 7:30');
-const startToEndMs = END.diff(START, 'millisecond');
-
 const msPerMinute = 60 * 1000;
 const msPerHour = msPerMinute * 60;
 const msPerDay = msPerHour * 24;
