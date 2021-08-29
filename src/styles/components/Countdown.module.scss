@@ -1,4 +1,5 @@
 @import '../variables';
+@import '../mixins';
 
 .countdownContainer {
   display: flex;
@@ -51,12 +52,76 @@
     &:nth-child(5) { span { color: $green; } }
     &:nth-child(7) { span { color: $cyan; } }
     &:nth-child(9) { span { color: $purple; } }
+    &:nth-child(11) { span { color: $pink; } }
   }
-
 
   > span {
     font-size: 5em;
 
     color: #fff;
+  }
+}
+
+.countdownContainer {
+  @include laptop {
+    display: grid;
+    grid-template-columns: repeat(1fr, 5);
+    grid-template-rows: auto;
+    grid-template-areas: 
+      'years . months . days'
+      'hours . minutes . seconds';
+
+    row-gap: 1em;
+
+    span:nth-child(6) {
+      display: none;
+    }
+
+    > div {
+      font-size: 1em;
+
+      &:nth-child(1) { grid-area: years; }
+      &:nth-child(3) { grid-area: months; }
+      &:nth-child(5) { grid-area: days; }
+      &:nth-child(7) { grid-area: hours; }
+      &:nth-child(9) { grid-area: minutes; }
+      &:nth-child(11) { grid-area: seconds; }
+    }
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+      'years months days'
+      'hours minutes seconds';
+    
+    gap: 1em;
+
+    > div {
+      font-size: 1em;
+      
+    }
+
+    > span {
+      display: none;
+    }
+  }
+
+  @include mobile-large {
+    > div {
+      font-size: .8em;
+    }
+  }
+
+  @include mobile-medium {
+    > div {
+      font-size: .7em;
+    }
+  }
+
+  @include mobile-small {
+    > div {
+      font-size: .6em;
+    }
   }
 }
