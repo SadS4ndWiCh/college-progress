@@ -13,6 +13,7 @@ const msPerMinute = 60 * 1000;
 const msPerHour = msPerMinute * 60;
 const msPerDay = msPerHour * 24;
 const msPerMonth = msPerDay * 30;
+const msPerYear = msPerMonth * 12;
 
 function formatTime(n: number): string {
   return String(n).padStart(2, '0');
@@ -20,6 +21,7 @@ function formatTime(n: number): string {
 
 export function useTime() {
   const [leftTime, setLeftTime] = useState({
+    years: '00',
     months: '00',
     days: '00',
     hours: '00',
@@ -30,6 +32,8 @@ export function useTime() {
   useEffect(() => {
     setInterval(() => {
       let nowToEndMs = END.diff(dayjs(), 'millisecond');
+      const yearsLeft = formatTime(Math.floor(nowToEndMs / msPerYear));
+      nowToEndMs = nowToEndMs % msPerYear;
       const monthsLeft = formatTime(Math.floor(nowToEndMs / msPerMonth));
       nowToEndMs = nowToEndMs % msPerMonth;
       const daysLeft = formatTime(Math.floor(nowToEndMs / msPerDay));
@@ -41,6 +45,7 @@ export function useTime() {
       const secondsLeft = formatTime(Math.floor(nowToEndMs / 1000));
       
       setLeftTime({
+        years: yearsLeft,
         months: monthsLeft,
         days: daysLeft,
         hours: hoursLeft,
