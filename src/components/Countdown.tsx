@@ -8,6 +8,13 @@ export function Countdown() {
   return (
     <div className={styles.countdownContainer}>
       <div>
+        <span>{leftTime.years}</span>
+        <p>Ano</p>
+      </div>
+
+      <span>:</span>
+      <div>
+
         <span>{leftTime.months}</span>
         <p>Mesês</p>
       </div>
