@@ -1,4 +1,5 @@
 @import '../variables';
+@import '../mixins';
 
 .container {
   display: flex;
@@ -52,6 +53,62 @@
       font-size: .9em;
       
       color: $discrete-text;
+    }
+  }
+
+  @include tablet {
+    text-align: center;
+
+    header {
+      justify-content: center;
+    }
+
+    main {
+      h2 {
+        font-size: 2.3em;
+      }
+    }
+  }
+
+  @include mobile-large {
+    header {
+      h1 {
+        font-size: 2.2em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
+
+    main {
+      h2 {
+        font-size: 2em;
+      }
+
+      small {
+        font-size: .7em;
+      }
+    }
+  }
+
+  @include mobile-medium {
+    main {
+      h2 {
+        font-size: 1.7em;
+      }
+
+      small {
+        font-size: .6em;
+      }
+    }
+  }
+
+  @include mobile-small {
+    main {
+      h2 {
+        font-size: 1.5em;
+      }
     }
   }
 }
