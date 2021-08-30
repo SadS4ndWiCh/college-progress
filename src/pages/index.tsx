@@ -1,11 +1,20 @@
 import type { NextPage } from 'next'
 import Head from 'next/head';
 
+import { useTime } from '@hooks/useTime';
+
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti';
+
 import { Countdown } from '@components/Countdown';
 
 import styles from '@styles/pages/Home.module.scss';
 
 const Home: NextPage = () => {
+  const { isCountdownFinish } = useTime();
+
+  const { width, height } = useWindowSize();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,6 +38,13 @@ const Home: NextPage = () => {
 
         <title>ADS Fatec - Contagem Regressiva</title>
       </Head>
+
+      { isCountdownFinish && (
+        <Confetti 
+          width={width}
+          height={height}
+        />
+      ) }
 
       <header>
         <div>
