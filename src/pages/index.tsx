@@ -1,8 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head';
 
-import ogImage from '@public/images/og-image.webp';
-
 import { Countdown } from '@components/Countdown';
 
 import styles from '@styles/pages/Home.module.scss';
@@ -13,21 +11,21 @@ const Home: NextPage = () => {
       <Head>
         <meta name="title" content="ADS Fatec - Contagem Regressiva" />
         <meta name="description" content="Contagem regressiva para o termino da faculdade de ADS" />
-        <meta property="og:image" content={`https://adsfatec.vercel.app/images/${ogImage}`} />
+        <meta property="og:image" content="https://adsfatec.vercel.app/images/og-image.webp" />
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://adsfatec.vercel.app/" />
         <meta property="og:title" content="ADS Fatec - Contagem Regressiva" />
         <meta property="og:description" content="Contagem regressiva para o termino da faculdade de ADS" />
-        <meta property="og:image" content="https://adsfatec.vercel.app/assets/og-image.webp" />
+        <meta property="og:image" content="https://adsfatec.vercel.app/images/og-image.webp" />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://adsfatec.vercel.app/" />
         <meta property="twitter:title" content="ADS Fatec - Contagem Regressiva" />
         <meta property="twitter:description" content="Contagem regressiva para o termino da faculdade de ADS" />
-        <meta property="twitter:image" content="https://adsfatec.vercel.app/assets/og-image.webp" />
+        <meta property="twitter:image" content="https://adsfatec.vercel.app/images/og-image.webp" />
 
         <title>ADS Fatec - Contagem Regressiva</title>
       </Head>
