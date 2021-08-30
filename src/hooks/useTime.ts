@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -8,7 +8,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
-const END = dayjs.tz('2023-1-28 7:30');
+//const END = dayjs.tz('2021-8-30 10:09');
+const END = dayjs().add(10, 'seconds');
 const msPerMinute = 60 * 1000;
 const msPerHour = msPerMinute * 60;
 const msPerDay = msPerHour * 24;
@@ -18,6 +19,8 @@ const msPerYear = msPerMonth * 12;
 function formatTime(n: number): string {
   return String(n).padStart(2, '0');
 }
+
+let countdownInterval: ReturnType<typeof setInterval>;
 
 export function useTime() {
   const [leftTime, setLeftTime] = useState({
@@ -29,9 +32,16 @@ export function useTime() {
     seconds: '00',
   });
 
+  const [isCountdownFinish, setIsCountdownFinish] = useState(false);
+
   useEffect(() => {
-    setInterval(() => {
+    countdownInterval = setInterval(() => {
       let nowToEndMs = END.diff(dayjs(), 'millisecond');
+      if (nowToEndMs <= 0) {
+        setIsCountdownFinish(true);
+        return;
+      };
+
       const yearsLeft = formatTime(Math.floor(nowToEndMs / msPerYear));
       nowToEndMs = nowToEndMs % msPerYear;
       const monthsLeft = formatTime(Math.floor(nowToEndMs / msPerMonth));
@@ -55,5 +65,11 @@ export function useTime() {
     }, 1000);
   }, []);
 
-  return { leftTime }
+  useEffect(() => {
+    if (isCountdownFinish) {
+      clearInterval(countdownInterval);
+    }
+  }, [isCountdownFinish]);
+
+  return { leftTime, isCountdownFinish }
 }
