@@ -8,8 +8,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
-//const END = dayjs.tz('2021-8-30 10:09');
-const END = dayjs().add(10, 'seconds');
+const END = dayjs.tz('2021-8-30 10:09');
 const msPerMinute = 60 * 1000;
 const msPerHour = msPerMinute * 60;
 const msPerDay = msPerHour * 24;
