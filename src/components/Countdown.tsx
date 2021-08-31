@@ -5,45 +5,49 @@ import styles from '@styles/components/Countdown.module.scss';
 export function Countdown() {
   const { leftTime } = useTime();
 
+  function formatTime(n: number): string {
+    return String(n).padStart(2, '0');
+  }
+
   return (
     <div className={styles.countdownContainer}>
       <div>
-        <span>{leftTime.years}</span>
+        <span>{formatTime(leftTime.years)}</span>
         <p>Ano</p>
       </div>
 
       <span>:</span>
       <div>
 
-        <span>{leftTime.months}</span>
+        <span>{formatTime(leftTime.months)}</span>
         <p>Mesês</p>
       </div>
 
       <span>:</span>
       
       <div>
-        <span>{leftTime.days}</span>
+        <span>{formatTime(leftTime.days)}</span>
         <p>Dias</p>
       </div>
 
       <span>:</span>
       
       <div>
-        <span>{leftTime.hours}</span>
+        <span>{formatTime(leftTime.hours)}</span>
         <p>Horas</p>
       </div>
 
       <span>:</span>
       
       <div>
-        <span>{leftTime.minutes}</span>
+        <span>{formatTime(leftTime.minutes)}</span>
         <p>Minutos</p>
       </div>
 
       <span>:</span>
       
       <div>
-        <span>{leftTime.seconds}</span>
+        <span>{formatTime(leftTime.seconds)}</span>
         <p>Segundos</p>
       </div>
     </div>
