@@ -1,73 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(utc);
+dayjs.extend(duration);
 dayjs.extend(timezone);
 dayjs.tz.setDefault('America/Sao_Paulo');
 
-const END = dayjs.tz('2021-8-30 10:09');
-const msPerMinute = 60 * 1000;
-const msPerHour = msPerMinute * 60;
-const msPerDay = msPerHour * 24;
-const msPerMonth = msPerDay * 30;
-const msPerYear = msPerMonth * 12;
-
-function formatTime(n: number): string {
-  return String(n).padStart(2, '0');
-}
-
-let countdownInterval: ReturnType<typeof setInterval>;
+const END = dayjs('2023-01-28 7:30');
 
 export function useTime() {
   const [leftTime, setLeftTime] = useState({
-    years: '00',
-    months: '00',
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
+    years: 0,
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   const [isCountdownFinish, setIsCountdownFinish] = useState(false);
 
   useEffect(() => {
-    countdownInterval = setInterval(() => {
-      let nowToEndMs = END.diff(dayjs(), 'millisecond');
-      if (nowToEndMs <= 0) {
-        setIsCountdownFinish(true);
-        return;
-      };
+    if (isCountdownFinish) return
 
-      const yearsLeft = formatTime(Math.floor(nowToEndMs / msPerYear));
-      nowToEndMs = nowToEndMs % msPerYear;
-      const monthsLeft = formatTime(Math.floor(nowToEndMs / msPerMonth));
-      nowToEndMs = nowToEndMs % msPerMonth;
-      const daysLeft = formatTime(Math.floor(nowToEndMs / msPerDay));
-      nowToEndMs = nowToEndMs % msPerDay;
-      const hoursLeft = formatTime(Math.floor(nowToEndMs / msPerHour));
-      nowToEndMs = nowToEndMs % msPerHour;
-      const minutesLeft = formatTime(Math.floor(nowToEndMs / msPerMinute));
-      nowToEndMs = nowToEndMs % msPerMinute
-      const secondsLeft = formatTime(Math.floor(nowToEndMs / 1000));
+    let countdownInterval = setInterval(() => {
+      const difference = dayjs.duration(END.diff(dayjs()));
       
-      setLeftTime({
-        years: yearsLeft,
-        months: monthsLeft,
-        days: daysLeft,
-        hours: hoursLeft,
-        minutes: minutesLeft,
-        seconds: secondsLeft,
-      });
-    }, 1000);
-  }, []);
+      if (difference.milliseconds() > 0) {
+        setLeftTime({
+          years: difference.years(),
+          months: difference.months(),
+          days: difference.days(),
+          hours: difference.hours(),
+          minutes: difference.minutes(),
+          seconds: difference.seconds(),
+        });
+      } else {
+        return setIsCountdownFinish(true);
+      }
 
-  useEffect(() => {
-    if (isCountdownFinish) {
-      clearInterval(countdownInterval);
-    }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
   }, [isCountdownFinish]);
 
   return { leftTime, isCountdownFinish }
